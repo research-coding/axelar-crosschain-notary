@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
+
+contract Notary {
+    mapping(address => bool) public validators;
+
+    constructor(address[] memory _validators) {
+        for (uint256 i = 0; i < _validators.length; i++) {
+            validators[_validators[i]] = true;
+        }
+    }
+
+    function validateTransaction(address sender, address receiver, uint256 amount) external view returns (bool) {
+        return validators[sender];
+    }
+}
